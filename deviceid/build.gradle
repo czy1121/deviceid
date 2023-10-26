@@ -1,0 +1,10 @@
+
+
+apply from: "$buildGradlePath/build-library-android.gradle"
+
+
+
+dependencies {
+//    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation "com.huawei.hms:ads-identifier:3.4.62.300"
+}

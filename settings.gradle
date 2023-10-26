@@ -1,0 +1,31 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url cosmoRepoPath }
+        google()
+        mavenCentral()
+
+
+        maven {url 'https://developer.huawei.com/repo/'}
+    }
+    versionCatalogs {
+        libs {
+            from files("$buildGradlePath/versions-basic.toml")
+        }
+    }
+}
+
+rootProject.name = "deviceid"
+include ':app'
+
+include ':deviceid'
+include ':deviceid-oaid'

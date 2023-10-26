@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="me.reezy.cosmo">
+
+    <!-- sus -->
+    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" />
+    <!-- freeme -->
+    <uses-permission android:name="freemme.permission.msa" />
+</manifest>

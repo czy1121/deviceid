@@ -1,0 +1,17 @@
+
+apply from: "$buildGradlePath/build-demo.gradle"
+
+android.defaultConfig.targetSdkVersion = 32
+
+dependencies {
+
+    implementation project(':deviceid')
+    implementation project(':deviceid-oaid')
+    //    implementation 'me.reezy.cosmo:pullrefresh:0.8.0'
+//    implementation 'me.reezy.cosmo:pullrefresh-simple:0.8.0'
+//    implementation 'me.reezy.cosmo:tabs:0.8.0'
+//    implementation 'me.reezy.cosmo:bannerview:0.8.0'
+//    implementation 'me.reezy.cosmo:misc:0.8.0'
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+}
