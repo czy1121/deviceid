@@ -133,7 +133,7 @@ repositories {
 }
 dependencies {
     implementation "me.reezy.cosmo:deviceid:0.8.0"
-    implementation "me.reezy.cosmo:deviceid-oaid:0.8.0"
+    implementation "me.reezy.cosmo:deviceid-oaid:0.10.0"
 }
 ```
 
