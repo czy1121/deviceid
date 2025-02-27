@@ -16,6 +16,7 @@ dependencyResolutionManagement {
 
 
         maven { url 'https://developer.huawei.com/repo/' }
+        maven { url 'https://developer.hihonor.com/repo/' }
     }
     versionCatalogs {
         libs { from files("$buildGradlePath/versions-cosmo.toml") }

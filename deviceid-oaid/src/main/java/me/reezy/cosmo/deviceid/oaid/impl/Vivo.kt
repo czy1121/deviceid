@@ -3,7 +3,7 @@ package me.reezy.cosmo.deviceid.oaid.impl
 import android.content.Context
 import me.reezy.cosmo.deviceid.oaid.OaidProvider
 import me.reezy.cosmo.deviceid.oaid.Rom
-import me.reezy.cosmo.deviceid.oaid.getId
+import me.reezy.cosmo.deviceid.oaid.queryId
 
 internal class Vivo : OaidProvider {
 
@@ -12,6 +12,6 @@ internal class Vivo : OaidProvider {
     }
 
     override fun get(context: Context, callback: (Result<String>) -> Unit) {
-        context.contentResolver.getId("content://com.vivo.vms.IdProvider/IdentifierId/OAID", null, callback)
+        context.queryId("content://com.vivo.vms.IdProvider/IdentifierId/OAID", null, callback)
     }
 }

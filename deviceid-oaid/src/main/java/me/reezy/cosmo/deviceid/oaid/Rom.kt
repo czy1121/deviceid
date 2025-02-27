@@ -1,3 +1,5 @@
+
+
 package me.reezy.cosmo.deviceid.oaid
 
 import android.annotation.SuppressLint
@@ -7,11 +9,15 @@ import java.util.*
 
 
 @SuppressLint("PrivateApi")
+@Suppress("MemberVisibilityCanBePrivate")
 object Rom {
 
     val manufacturer: String = Build.MANUFACTURER.lowercase(Locale.ROOT)
 
-    val isHuawei: Boolean get() = manufacturer == "huawei"
+    val brand: String = Build.BRAND.lowercase(Locale.ROOT)
+
+    val isHuawei: Boolean get() = manufacturer == "huawei" || brand == "huawei"
+    val isHonor: Boolean get() = manufacturer == "honor" || brand == "honor"
     val isXiaomi: Boolean get() = manufacturer == "xiaomi"
     val isOppo: Boolean get() = manufacturer == "oppo"
     val isVivo: Boolean get() = manufacturer == "vivo"
@@ -42,7 +48,6 @@ object Rom {
     fun isCoolpad(context: Context): Boolean = context.hasPackage("com.coolpad.deviceidsupport")
 
 
-    @SuppressLint("PrivateApi")
     fun getSystemProperty(key: String, defValue: String? = null): String? {
         try {
             val clazz = Class.forName("android.os.SystemProperties")

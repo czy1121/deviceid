@@ -6,4 +6,5 @@ apply from: "$buildGradlePath/build-library-android.gradle"
 
 dependencies {
     compileOnly "com.huawei.hms:ads-identifier:3.4.62.300"
+    compileOnly 'com.hihonor.mcs:ads-identifier:1.0.3.300'
 }

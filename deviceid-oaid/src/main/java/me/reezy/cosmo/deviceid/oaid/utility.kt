@@ -2,17 +2,11 @@
 
 package me.reezy.cosmo.deviceid.oaid
 
-import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.os.IBinder
 import android.os.Parcel
-import android.util.Log
 
-
-internal fun log(message: String, throwable: Throwable? = null, tag: String = "ezy") {
-    Log.e(tag, message, throwable)
-}
 
 internal fun Context.hasPackage(vararg packageNames: String) = try {
     packageNames.any { packageManager.getPackageInfo(it, 0) != null }
@@ -58,27 +52,30 @@ internal fun IBinder.getId(interfaceName: String, code: Int, paramsBlock: (Parce
     }
 }
 
-internal fun ContentResolver.getId(uri: String, args: Array<String>?, callback: (Result<String>) -> Unit) {
+internal fun Context.queryId(uri: String, args: Array<String>?, callback: (Result<String>) -> Unit) {
     try {
-        val cursor = query(Uri.parse(uri), null, null, args, null) ?: throw OaidException("oaid cursor is null")
+        val cursor = contentResolver.query(Uri.parse(uri), null, null, args, null)
+            ?: throw OaidException("cursor is null")
 
         val oaid = cursor.use {
             if (!it.moveToFirst()) {
-                throw OaidException("oaid cursor is empty")
+                throw OaidException("cursor is empty")
             }
             val index = it.getColumnIndex("value")
             if (index < 0) {
-                throw OaidException("oaid cursor columnIndex out of range")
+                throw OaidException("cursor columnIndex out of range")
             }
-           it.getString(index)
+            it.getString(index)
         }
-        if (oaid.isNullOrBlank()) {
-            throw OaidException("oaid is empty")
-        }
-        callback.invoke(Result.success(oaid))
+        callback(validate(oaid))
     } catch (e: Exception) {
         callback(Result.failure(e))
     }
 }
 
+internal fun validate(oaid: String?) = when {
+    oaid.isNullOrBlank() -> Result.failure(OaidException("oaid is empty"))
+    oaid.matches(Regex("^[0-]+$")) -> Result.failure(OaidException("oaid is invalid"))
+    else -> Result.success(oaid)
+}
 

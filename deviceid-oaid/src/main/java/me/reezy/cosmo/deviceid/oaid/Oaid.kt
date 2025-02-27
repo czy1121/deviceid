@@ -4,8 +4,8 @@ import android.content.Context
 import me.reezy.cosmo.deviceid.oaid.impl.Asus
 import me.reezy.cosmo.deviceid.oaid.impl.Coolpad
 import me.reezy.cosmo.deviceid.oaid.impl.Freeme
-import me.reezy.cosmo.deviceid.oaid.impl.Unsupported
 import me.reezy.cosmo.deviceid.oaid.impl.Gms
+import me.reezy.cosmo.deviceid.oaid.impl.Honor
 import me.reezy.cosmo.deviceid.oaid.impl.Huawei
 import me.reezy.cosmo.deviceid.oaid.impl.Lenovo
 import me.reezy.cosmo.deviceid.oaid.impl.Meizu
@@ -13,6 +13,7 @@ import me.reezy.cosmo.deviceid.oaid.impl.Msa
 import me.reezy.cosmo.deviceid.oaid.impl.Nubia
 import me.reezy.cosmo.deviceid.oaid.impl.Oppo
 import me.reezy.cosmo.deviceid.oaid.impl.Samsung
+import me.reezy.cosmo.deviceid.oaid.impl.Unsupported
 import me.reezy.cosmo.deviceid.oaid.impl.Vivo
 import me.reezy.cosmo.deviceid.oaid.impl.Xiaomi
 
@@ -60,6 +61,14 @@ object Oaid {
     private fun createProvider(context: Context): OaidProvider {
         val provider = when {
             Rom.isHuawei -> Huawei()
+            Rom.isHonor -> {
+                val impl = Honor()
+                if (impl.isSupport(context)) {
+                    return impl
+                }
+                Huawei()
+            }
+
             Rom.isOppo || Rom.isOnePlus -> Oppo()
             Rom.isVivo -> Vivo()
             Rom.isXiaomi || Rom.isBlackShark -> Xiaomi()

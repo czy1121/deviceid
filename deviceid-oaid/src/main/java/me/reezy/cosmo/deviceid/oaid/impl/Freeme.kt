@@ -3,7 +3,7 @@ package me.reezy.cosmo.deviceid.oaid.impl
 import android.content.Context
 import android.content.Intent
 import me.reezy.cosmo.deviceid.oaid.OaidProvider
-import me.reezy.cosmo.deviceid.oaid.OaidService
+import me.reezy.cosmo.deviceid.oaid.OaidConnection
 import me.reezy.cosmo.deviceid.oaid.getId
 import me.reezy.cosmo.deviceid.oaid.hasPackage
 
@@ -13,10 +13,10 @@ internal class Freeme : OaidProvider {
 
 
     override fun get(context: Context, callback: (Result<String>) -> Unit) {
-        val intent = Intent("android.service.action.msa",)
+        val intent = Intent("android.service.action.msa")
         intent.setPackage("com.android.creator")
 
-        OaidService.bind(context, intent, callback) {
+        OaidConnection.bind(context, intent, callback) {
             it.getId("com.android.creator.IdsSupplier", 3)
         }
     }

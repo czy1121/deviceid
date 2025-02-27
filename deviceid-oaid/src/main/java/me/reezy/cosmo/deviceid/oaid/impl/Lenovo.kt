@@ -3,7 +3,7 @@ package me.reezy.cosmo.deviceid.oaid.impl
 import android.content.Context
 import android.content.Intent
 import me.reezy.cosmo.deviceid.oaid.OaidProvider
-import me.reezy.cosmo.deviceid.oaid.OaidService
+import me.reezy.cosmo.deviceid.oaid.OaidConnection
 import me.reezy.cosmo.deviceid.oaid.getId
 import me.reezy.cosmo.deviceid.oaid.hasPackage
 
@@ -16,7 +16,7 @@ internal class Lenovo : OaidProvider {
         val intent = Intent()
         intent.setClassName("com.zui.deviceidservice", "com.zui.deviceidservice.DeviceidService")
 
-        OaidService.bind(context, intent, callback) {
+        OaidConnection.bind(context, intent, callback) {
             it.getId("com.zui.deviceidservice.IDeviceidInterface", 1)
         }
     }

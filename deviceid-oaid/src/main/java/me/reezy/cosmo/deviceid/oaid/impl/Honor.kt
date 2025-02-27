@@ -1,17 +1,18 @@
 package me.reezy.cosmo.deviceid.oaid.impl
 
 import android.content.Context
-import com.huawei.hms.ads.identifier.AdvertisingIdClient
+import com.hihonor.ads.identifier.AdvertisingIdClient
 import me.reezy.cosmo.deviceid.oaid.OaidException
 import me.reezy.cosmo.deviceid.oaid.OaidProvider
 import me.reezy.cosmo.deviceid.oaid.validate
 import java.util.concurrent.Executors
 
+
 /**
- * 参阅华为官方文档
- * [HUAWEI Ads SDK](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/identifier-service-integrating-sdk-0000001056460552)
+ * 参阅荣耀官方
+ * [HONOR Ads SDK](https://developer.hihonor.com/cn/kitdoc?kitId=11030&navigation=guides&docId=dev-overview.md)
  */
-internal class Huawei : OaidProvider {
+internal class Honor : OaidProvider {
 
     override fun isSupport(context: Context): Boolean {
         return try {
@@ -25,7 +26,7 @@ internal class Huawei : OaidProvider {
         Executors.newSingleThreadExecutor().execute {
             try {
                 val info = AdvertisingIdClient.getAdvertisingIdInfo(context)
-                if (info.isLimitAdTrackingEnabled) {
+                if (info.isLimit) {
                     throw OaidException("oaid is limited")
                 }
                 callback(validate(info.id))

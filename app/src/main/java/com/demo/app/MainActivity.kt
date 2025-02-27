@@ -1,6 +1,7 @@
 package com.demo.app
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.demo.app.databinding.ActivityMainBinding
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             val isSupport = Oaid.isSupport(this)
             val oaid = it.getOrNull() ?: it.exceptionOrNull()?.message
             binding.oaid.text = "oaid provider = $provider\noaid support = $isSupport\noaid = $oaid"
+            Log.e("OoO", binding.oaid.text.toString())
         }
 
         val androidId = DeviceId.getAndroidId(this)

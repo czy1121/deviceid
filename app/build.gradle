@@ -9,6 +9,7 @@ dependencies {
     implementation project(':deviceid-oaid')
 
     implementation "com.huawei.hms:ads-identifier:3.4.62.300"
+    implementation 'com.hihonor.mcs:ads-identifier:1.0.3.300'
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

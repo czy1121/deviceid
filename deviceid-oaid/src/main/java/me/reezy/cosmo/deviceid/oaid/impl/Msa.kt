@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import me.reezy.cosmo.deviceid.oaid.OaidProvider
-import me.reezy.cosmo.deviceid.oaid.OaidService
+import me.reezy.cosmo.deviceid.oaid.OaidConnection
 import me.reezy.cosmo.deviceid.oaid.getId
 import me.reezy.cosmo.deviceid.oaid.hasPackage
 
@@ -31,7 +31,7 @@ internal class Msa : OaidProvider {
         intent.setClassName("com.mdid.msa", "com.mdid.msa.service.MsaIdService")
         intent.putExtra("com.bun.msa.param.pkgname", context.packageName)
 
-        OaidService.bind(context, intent, callback) {
+        OaidConnection.bind(context, intent, callback) {
             it.getId("com.bun.lib.MsaIdInterface", 2)
         }
     }
